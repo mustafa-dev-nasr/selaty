@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:selaty/core/helpers/extensions/app_navigotion.dart';
 import 'package:selaty/core/theming/app_text_styles.dart';
-
 import '../../../../core/routing/route.dart';
 
 class InfoCard extends StatelessWidget {
-  final String title; // Title of the card
-  final String imagePath; // Path to the image
-  final double width; // Width of the card
-  final double height; // Height of the card
+  final String title;
+  final String imagePath;
+  final String bcImagePath;
+  final double width;
+  final double height;
 
   const InfoCard({
     super.key,
     required this.title,
     required this.imagePath,
+    required this.bcImagePath,
     required this.width,
     required this.height,
   });
@@ -26,53 +27,56 @@ class InfoCard extends StatelessWidget {
         context.pushNamed(Routes.categoriesDetails);
       },
       child: Container(
-        width: width, // Set the width of the card
-        height: height, // Set the height of the card
-        margin: EdgeInsets.only(right: 10.w), // Add right margin
+        margin: EdgeInsets.only(
+          left: 10.w,
+        ),
+        width: width,
+        height: height,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.r), // Rounded corners
-          color: Colors.white, // Card background color
+          borderRadius: BorderRadius.circular(10.r),
+          color: Colors.white,
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start, // Align items at the top
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            const Spacer(flex: 1),
             Padding(
-              padding: EdgeInsets.all(8.w), // Padding around the title
+              padding: EdgeInsets.all(8.w),
               child: Text(
-                title, // Display the title
-                style: AppTextStyles
-                    .font16BlackSemibold, // Text style for the title
-                textAlign: TextAlign.center, // Center align the title
+                title,
+                style: AppTextStyles.font16BlackSemibold,
+                textAlign: TextAlign.center,
               ),
             ),
-            const Spacer(), // Add space between title and image
+            const Spacer(flex: 2),
             Stack(
-              clipBehavior: Clip.none, // Allow overflow for positioned children
-              alignment: Alignment.center, // Center align children in the stack
+              clipBehavior: Clip.none,
+              alignment: Alignment.center,
               children: [
-                Image.asset(
-                  imagePath, // Load the image
-                  width: width, // Set the image width
-                  height: height /
-                      1.2, // Set the image height (half of card height)
-                  fit: BoxFit.cover, // Cover the image area
-                ),
-                Positioned(
-                  top: -20.h, // Positioning above the card
-                  child: CircleAvatar(
-                    backgroundColor:
-                        Colors.white, // Background color of the outer circle
-                    radius: 22.r, // Outer circle radius
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10.r),
+                      bottomRight: Radius.circular(10.r)),
+                  child: Image.asset(
+                    bcImagePath,
+                    width: width,
+                    height: height / 1.7,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 Positioned(
-                  top: -20.h, // Positioning above the card
+                  top: -20.h,
                   child: CircleAvatar(
-                    backgroundColor:
-                        Colors.orange, // Background color of the inner circle
-                    radius: 20.r, // Inner circle radius
-                    backgroundImage:
-                        AssetImage(imagePath), // Load image for inner circle
+                    backgroundColor: Colors.white,
+                    radius: 22.r,
+                  ),
+                ),
+                Positioned(
+                  top: -20.h,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.orange,
+                    radius: 20.r,
+                    backgroundImage: AssetImage(imagePath,),
                   ),
                 ),
               ],

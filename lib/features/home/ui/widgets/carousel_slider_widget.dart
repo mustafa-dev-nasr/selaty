@@ -12,7 +12,7 @@ class CustomCarouselSlider extends StatelessWidget {
       options: CarouselOptions(
         height: MediaQuery.of(context).size.height * 0.2,
         enlargeCenterPage: true,
-        viewportFraction: 0.85,
+        viewportFraction: 1,
         autoPlay: true,
         autoPlayInterval: const Duration(seconds: 3),
         autoPlayAnimationDuration: const Duration(milliseconds: 800),
@@ -21,7 +21,7 @@ class CustomCarouselSlider extends StatelessWidget {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-              width: 0.9.sw,
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10.r)),
                 image: const DecorationImage(

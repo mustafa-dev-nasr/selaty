@@ -2,6 +2,10 @@
 class Assets {
   Assets._();
   
+  /// Assets for resourceImagesAdd
+  /// assets/images/add.png
+  static const String resourceImagesAdd = "assets/images/add.png";
+
   /// Assets for resourceImagesBackground
   /// assets/images/background.jpg
   static const String resourceImagesBackground = "assets/images/background.jpg";

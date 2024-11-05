@@ -53,8 +53,9 @@ class QualifiersScreen extends StatelessWidget {
                   itemCount: 10, // Replace with dynamic item count if needed
                   itemBuilder: (context, index) {
                     return InfoCard(
+                      bcImagePath: Assets.resourceImagesFruitsCategory,
                       title: 'التصفيات',
-                      imagePath: Assets.resourceImagesFruitsCategory,
+                      imagePath: Assets.resourceImagesCategoryIcon,
                       width: isPortrait
                           ? 200.w
                           : MediaQuery.of(context).size.width / 2.5,

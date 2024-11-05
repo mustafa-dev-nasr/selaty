@@ -4,47 +4,48 @@ import 'package:selaty/constants/assets.dart';
 import 'package:selaty/core/theming/app_colors.dart';
 import 'package:selaty/core/theming/app_text_styles.dart';
 
-class HorizontalListView extends StatelessWidget {
-  const HorizontalListView({super.key});
+class ProductGridView extends StatelessWidget {
+  const ProductGridView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
-    final itemHeight = orientation == Orientation.portrait
-        ? MediaQuery.of(context).size.height / 3.5
-        : MediaQuery.of(context).size.height / 1.5;
-
+    final isorientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return SizedBox(
-      height: itemHeight,
-      width: MediaQuery.of(context).size.width,
-      child: ListView.builder(
+      height: MediaQuery.of(context).size.height / 1.6,
+      child: GridView.builder(
         scrollDirection: Axis.horizontal,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: isorientation ? 2 : 4,
+          mainAxisSpacing: 10.w,
+          childAspectRatio: 1.3, // Adjust as needed
+        ),
         itemCount: 10, // Adjust the number of items as needed
         itemBuilder: (context, index) {
-          return _buildListItem(context, orientation);
+          return _buildGridItem(context); // Build each grid item
         },
       ),
     );
   }
 
-  Widget _buildListItem(BuildContext context, Orientation orientation) {
+  Widget _buildGridItem(BuildContext context) {
     return Container(
-      width: orientation == Orientation.portrait
-          ? MediaQuery.of(context).size.width / 2.5
-          : MediaQuery.of(context).size.width / 3.5,
-      margin: EdgeInsets.only(right: 10.w),
+      margin: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.r),
         color: Colors.white,
       ),
       child: Stack(
         children: [
-          Center(
+          Positioned(
+            top: 40.h,
+            left: 0.w,
+            right: 0.w,
             child: Image.asset(
               Assets.resourceImagesPngwin,
-              width: orientation == Orientation.portrait ? 120.w : 120.w,
-              height: orientation == Orientation.portrait ? 150.h : 300.h,
-              fit: BoxFit.fill,
+              width: 100.w,
+              height: 150.h,
+              fit: BoxFit.cover,
             ),
           ),
           Positioned(
@@ -61,30 +62,28 @@ class HorizontalListView extends StatelessWidget {
           Positioned(
             top: 4.h,
             right: 4.w,
-            child: _buildNewBadge(context),
+            child: _buildNewBadge(),
           ),
           Positioned(
             bottom: 50.h,
             right: 2.w,
-            child: _buildProductDetails(context),
+            child: _buildProductDetails(),
           ),
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
-            child: _buildPriceAndAvatar(context),
+            child: _buildPriceAndAvatar(),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildNewBadge(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
-
+  Widget _buildNewBadge() {
     return Container(
-      width: orientation == Orientation.portrait ? 50.w : 70.w,
-      height: orientation == Orientation.portrait ? 25.h : 60.h,
+      width: 50.w,
+      height: 25.h,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.r),
@@ -94,22 +93,20 @@ class HorizontalListView extends StatelessWidget {
         "جديد",
         style: TextStyle(
           color: Colors.white,
-          fontSize: orientation == Orientation.portrait ? 12.sp : 14.sp,
+          fontSize: 12.sp,
         ),
       ),
     );
   }
 
-  Widget _buildProductDetails(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
-
+  Widget _buildProductDetails() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: orientation == Orientation.portrait ? 60.w : 80.w,
-          height: orientation == Orientation.portrait ? 25.h : 60.h,
+          width: 60.w,
+          height: 25.h,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.r),
@@ -119,7 +116,7 @@ class HorizontalListView extends StatelessWidget {
             "فواكه",
             style: TextStyle(
               color: Colors.white,
-              fontSize: orientation == Orientation.portrait ? 12.sp : 14.sp,
+              fontSize: 12.sp,
             ),
           ),
         ),
@@ -128,29 +125,26 @@ class HorizontalListView extends StatelessWidget {
           "طبق فواكه",
           textAlign: TextAlign.start,
           style: TextStyle(
-            color: gray,
-            fontSize: orientation == Orientation.portrait ? 12.sp : 14.sp,
+            color: Colors.grey,
+            fontSize: 12.sp,
           ),
         ),
         Text(
           " Kg",
           textAlign: TextAlign.start,
           style: TextStyle(
-            color: gray,
-            fontSize: orientation == Orientation.portrait ? 12.sp : 14.sp,
+            color: Colors.grey,
+            fontSize: 12.sp,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildPriceAndAvatar(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
-
+  Widget _buildPriceAndAvatar() {
     return Container(
-      height: orientation == Orientation.portrait
-          ? 40.h
-          : 50.h, // Adjust height based on orientation
+      padding: EdgeInsets.only(left: 10.w, right: 10.w, bottom: 3.w),
+      height: 40.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(10.r),
@@ -162,29 +156,29 @@ class HorizontalListView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: orientation == Orientation.portrait
-                  ? 10.w
-                  : 15.w, // Adjust padding
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
             child: Text(
               "400 EGP",
-              style: AppTextStyles.font16BlackSemibold.copyWith(
-                fontSize: orientation == Orientation.portrait
-                    ? 16.sp
-                    : 12.sp, // Adjust font size
+              style:
+                  AppTextStyles.font16BlackSemibold.copyWith(fontSize: 16.sp),
+            ),
+          ),
+          Container(
+            width: 40.r, // Adjust based on your `radius` requirement
+            height: 40.r,
+            decoration: const BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Image.asset(
+                Assets.resourceImagesAdd,
+                color: Colors.white,
+                width: 20.r, // Adjust size as needed
+                height: 20.r,
               ),
             ),
-          ),
-          CircleAvatar(
-            backgroundColor: Colors.red,
-            radius: orientation == Orientation.portrait
-                ? 20.r
-                : 25.r, // Adjust radius
-            backgroundImage: const AssetImage(
-              Assets.resourceImagesCategoryIcon,
-            ),
-          ),
+          )
         ],
       ),
     );
