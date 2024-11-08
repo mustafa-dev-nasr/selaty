@@ -10,7 +10,7 @@ class Routes {
   static const String confirmReport = "/ConfirmScreen";
   static const String editProfile = "/EditProfile";
   static const String editSetting = "/EditSetting";
-  static const String editSecurity = "/EditSecurity";
+  static const String cardScreen = "/CardScreen";
   static const String resetPassword = "/ResetPassword";
   static const String secondResetPasswordScreen = "/SecondResetPasswordScreen";
   static const String changePhoneNumber = "/ChangePhoneNumber";

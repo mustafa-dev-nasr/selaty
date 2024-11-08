@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class GridItem extends StatelessWidget {
   final int index;
 
-  const GridItem({Key? key, required this.index}) : super(key: key);
+  const GridItem({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +23,33 @@ class GridItem extends StatelessWidget {
         color: colors[index],
         borderRadius: BorderRadius.circular(10.r),
       ),
-      child: Center(
-        child: Text(
-          'Item ${index + 1}',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16.sp,
+      child: Column(
+        children: [
+          Text(
+            'عرض ',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25.sp,
+            ),
           ),
-        ),
+          SizedBox(height: 10.h),
+          Text(
+            '40%',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30.sp,
+            ),
+          ),
+          SizedBox(height: 10.h),
+          Text(
+            'خصم',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 16.sp,
+            ),
+          ),
+        ],
       ),
     );
   }
