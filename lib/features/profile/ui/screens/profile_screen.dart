@@ -7,6 +7,7 @@ import 'package:selaty/core/theming/app_colors.dart';
 import '../../../../core/widgets/custom_icon_bar.dart';
 import '../../../home/ui/screens/home_screen.dart';
 import '../widgets/add_image.dart';
+import '../widgets/info_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -20,9 +21,10 @@ class ProfileScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
-            top: 50.h, // Responsive padding
+            top: 20.h,
             left: 20.w,
             right: 20.w,
+            bottom: 20.h,
           ),
           child: Column(
             children: [
@@ -43,35 +45,32 @@ class ProfileScreen extends StatelessWidget {
                 clipBehavior: Clip.none,
                 alignment: Alignment.center,
                 children: [
-                  // Profile Information Container
                   Container(
-                    width: 0.75.sw, // 75% of screen width
-                    height: 0.25.sh, // 25% of screen height
+                    width: 0.75.sw,
+                    height: 0.25.sh,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
                       color: AppColors.softGreen,
                     ),
                   ),
-                  // Circular Avatar Positioned Above the Profile Container
                   Positioned(
                     top: MediaQuery.of(context).orientation ==
                             Orientation.landscape
-                        ? -20.h // Smaller offset in landscape
-                        : -80.h, // Larger offset in portrait
+                        ? -20.h
+                        : -80.h,
                     child: AddImage(
                       onImageSelected: (imagePath) {
                         // Handle the selected image path here
                       },
                     ),
                   ),
-                  // Profile Information Container
                   Column(
                     children: [
                       Text(
-                        " مصطفي مجدي",
+                        "مصطفي مجدي",
                         style: TextStyle(
                           fontSize: 18.sp,
-                          color: white,
+                          color: Colors.white,
                         ),
                       ),
                       SizedBox(width: 5.w),
@@ -79,7 +78,7 @@ class ProfileScreen extends StatelessWidget {
                         "mustafa.dev.nasr@gmail.com",
                         style: TextStyle(
                           fontSize: 18.sp,
-                          color: white,
+                          color: Colors.white,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -87,75 +86,87 @@ class ProfileScreen extends StatelessWidget {
                   )
                 ],
               ),
-              Column(
-                children: [
-                  SizedBox(height: 10.h), // Optional spacing between rows
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InfoCard(screenWidth: screenWidth),
-                      InfoCard(screenWidth: screenWidth),
-                      InfoCard(screenWidth: screenWidth),
-                    ],
+              SizedBox(height: 20.h),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 10.w,
+                  mainAxisSpacing: 20.h,
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  childAspectRatio: (screenWidth / 3) / 120.h,
+                  children: List.generate(
+                    9,
+                    (index) => InfoCard(screenWidth: screenWidth),
                   ),
-                  20.verticalSpace,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InfoCard(screenWidth: screenWidth),
-                      InfoCard(screenWidth: screenWidth),
-                      InfoCard(screenWidth: screenWidth),
-                    ],
-                  ),
-                ],
+                ),
               ),
-              20.verticalSpace,
+              SizedBox(height: 20.h),
               Row(
                 children: [
                   20.horizontalSpace,
                   Container(
-                    width: 0.30.sw, // Width relative to screen width
-                    height: 0.15.sh, // Height relative to screen height
+                    width: 0.30.sw,
+                    height: 0.15.sh,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
-                      color: AppColors.softGreen,
+                      color: AppColors.lightRed,
                     ),
-                    child: Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.lightBlueAccent,
-                          borderRadius: BorderRadius.circular(10.r),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.lightGreen.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          width: 50.w,
+                          height: 50.h,
+                          child: const Icon(
+                            Icons.exit_to_app,
+                            color: Colors.white,
+                          ),
                         ),
-                        width: 50.w,
-                        height: 50.h,
-                        child: const Icon(
-                          Icons.add_ic_call_outlined,
-                          color: Colors.white, // Icon color
+                        Text(
+                          "التحديثات",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.sp,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                   const Spacer(),
                   Container(
-                    width: 0.30.sw, // Width relative to screen width
-                    height: 0.15.sh, // Height relative to screen height
+                    width: 0.30.sw,
+                    height: 0.15.sh,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
                       color: AppColors.softGreen,
                     ),
-                    child: Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.lightBlueAccent,
-                          borderRadius: BorderRadius.circular(10.r),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.lightGreen.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          width: 50.w,
+                          height: 50.h,
+                          child: const Icon(
+                            Icons.add_ic_call_outlined,
+                            color: Colors.white,
+                          ),
                         ),
-                        width: 50.w,
-                        height: 50.h,
-                        child: const Icon(
-                          Icons.add_ic_call_outlined,
-                          color: Colors.white, // Icon color
+                        Text(
+                          "مركز الادعم",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.sp,
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                   20.horizontalSpace,
@@ -163,57 +174,6 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class InfoCard extends StatelessWidget {
-  const InfoCard({
-    super.key,
-    required this.screenWidth,
-  });
-
-  final double screenWidth;
-
-  @override
-  Widget build(BuildContext context) {
-    // Calculate width dynamically for fitting items with spacing
-    final double cardWidth = (screenWidth - 60.w) / 3.5;
-
-    return Container(
-      width: cardWidth,
-      height: 0.13.sh, // 13% of screen height
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(36.r),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3), // Adds a subtle shadow
-          ),
-        ],
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const Icon(
-              Icons.person,
-              color: Colors.blueAccent,
-            ),
-            Text(
-              'Item',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-          ],
         ),
       ),
     );
