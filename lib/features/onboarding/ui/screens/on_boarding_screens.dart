@@ -47,6 +47,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
     );
   }
 
+  // Build content for each page of the onboarding process
   Widget _buildPageContent(
       BuildContext context, List<OnboardingInfo> items, int index) {
     return Stack(
@@ -60,11 +61,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(
-            top: 20.h,
-            left: 20.w,
-            right: 20.w,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -88,10 +85,10 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
     );
   }
 
+  // Skip button to skip onboarding steps
   Widget _buildSkipButton(int totalItems) {
-    return _isFirstPage
-        ? const SizedBox()
-        : Align(
+    return !_isFirstPage
+        ? Align(
             alignment: Alignment.topRight,
             child: TextButton(
               onPressed: () => skipToLastPage(_pageController, totalItems),
@@ -100,11 +97,25 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
                 style: AppTextStyles.font24BlueMedium,
               ),
             ),
-          );
+          )
+        : const SizedBox();
   }
 
+  // Bottom controls (smooth page indicator and next button)
   Widget _buildBottomControls(BuildContext context, int totalItems) {
-    final bool isArabic = Localizations.localeOf(context).languageCode == 'ar';
+    // Function to get active dot color based on the current page index
+    Color getActiveDotColor(int currentPage) {
+      switch (currentPage) {
+        case 0:
+          return AppColors.lightRed;
+        case 1:
+          return AppColors.softGreen;
+        case 2:
+          return AppColors.lavender;
+        default:
+          return AppColors.lightRed;
+      }
+    }
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,48 +123,54 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
         SmoothPageIndicator(
           controller: _pageController,
           count: totalItems,
-          effect: ExpandingDotsEffect(
-            activeDotColor: AppColors.lightRed,
-            dotColor: gray,
-            dotHeight: 10.h,
-            dotWidth: 20.w,
-            expansionFactor: 2.5.w,
+          effect: CustomizableEffect(
+            activeDotDecoration: DotDecoration(
+              width: 8.w,
+              height: 20.h,
+              color: getActiveDotColor(_pageController.page?.toInt() ?? 0),
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            dotDecoration: DotDecoration(
+              width: 8.h,
+              height: 8.h,
+              color: gray,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
             spacing: 5.0.w,
           ),
-          textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+          textDirection: TextDirection.ltr,
         ),
         _buildNextButton(context),
       ],
     );
   }
 
+  // Next button to navigate to the next page or complete onboarding
   Widget _buildNextButton(BuildContext context) {
-    return _isLastPage
-        ? OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              backgroundColor: AppColors.lightRed,
-              shape: const CircleBorder(),
-            ),
-            onPressed: () => context.pushNamed(Routes.mainAuth),
-            child: const Icon(Icons.arrow_back, color: white),
-          )
-        : OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              backgroundColor: AppColors.lightRed,
-              shape: const CircleBorder(),
-            ),
-            onPressed: () => _pageController.nextPage(
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        backgroundColor: AppColors.lightRed,
+        shape: const CircleBorder(),
+      ),
+      onPressed: () => _isLastPage
+          ? context
+              .pushNamed(Routes.mainAuth) // Navigate to main auth on last page
+          : _pageController.nextPage(
               duration: const Duration(milliseconds: 400),
               curve: Curves.easeIn,
             ),
-            child: const Icon(Icons.arrow_back, color: white),
-          );
+      child: Icon(
+        _isLastPage ? Icons.done : Icons.arrow_back,
+        color: Colors.white,
+      ),
+    );
   }
 
+  // Update the state for the first and last page
   void _updateIsLastPage(int currentPage, int totalPages) {
     setState(() {
       _isLastPage = currentPage == totalPages - 1;
-      _isFirstPage = currentPage == 2;
+      _isFirstPage = currentPage == 0;
     });
   }
 }

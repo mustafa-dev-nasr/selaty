@@ -9,14 +9,13 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Navigate to the next screen after 5 seconds
     Future.delayed(const Duration(seconds: 3), () {
       context.pushNamed(Routes.onBoardingScreen);
     });
@@ -26,7 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Background image fills the screen
         Positioned.fill(
           child: Image.asset(
             Assets.resourceImagesBackground,
@@ -41,7 +39,6 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo image with responsive size
                 Image.asset(
                   Assets.resourceImagesSplash,
                   width: 500.r,
@@ -49,7 +46,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   fit: BoxFit.contain,
                 ),
                 SizedBox(height: 40.r),
-                // Circular progress indicator
                 const CircularProgressIndicator(
                   color: AppColors
                       .softGreen, // Set to your primary color or desired color
