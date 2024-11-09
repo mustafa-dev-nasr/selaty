@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:selaty/features/splach/ui/screens/splash_screen.dart';
 import 'package:selaty/generated/l10n.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/route.dart';
@@ -40,7 +41,7 @@ class SelatyApp extends StatelessWidget {
           supportedLocales: S.delegate.supportedLocales,
           locale: const Locale('ar'),
           title: 'Radary',
-          home: const HomeScreen(),
+          home: const SplashScreen()
           // initialRoute:
           //     isLoggedIn ? Routes.homeScreen : Routes.onBoardingScreen,
         );

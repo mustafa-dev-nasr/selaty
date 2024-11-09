@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selaty/core/routing/route.dart';
+import 'package:selaty/features/splach/ui/screens/splash_screen.dart';
 import '../../features/card/ui/screens/card_screen.dart';
 import '../../features/card/ui/screens/empty_cart_screen.dart';
 import '../../features/categories_details.dart/ui/screens/categories_details_screen.dart';
@@ -13,14 +14,12 @@ import '../../features/profile/ui/screens/profile_screen.dart';
 import '../../features/qualifiers/ui/screens/qualifiers_screen.dart';
 import '../../features/sign_up/ui/screens/sign_up_screen.dart';
 import '../../features/successful_request/ui/screens/successful_request.dart';
-import '../widgets/animated_splash_screen_custom.dart';
 
 class AppRouter {
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.splashScreen:
-        return MaterialPageRoute(
-            builder: (_) => const AnimatedSplashScreenCustom());
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onBoardingScreen:
         return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
       case Routes.mainAuth:
@@ -46,8 +45,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const DeliveryAddressScreen());
       case Routes.successfulRequest:
         return MaterialPageRoute(builder: (_) => const SuccessfulRequest());
-        case Routes.arrangeTracks:
-        return MaterialPageRoute(builder: (_) =>  ArrangeTracks());
+      case Routes.arrangeTracks:
+        return MaterialPageRoute(builder: (_) => const ArrangeTracks());
+
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

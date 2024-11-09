@@ -74,6 +74,10 @@ class Assets {
   /// assets/images/shop.png
   static const String resourceImagesShop = "assets/images/shop.png";
 
+  /// Assets for resourceImagesSplash
+  /// assets/images/splash.png
+  static const String resourceImagesSplash = "assets/images/splash.png";
+
   /// Assets for resourceImagesSuccessBagIcon
   /// assets/images/success_bag_icon.png
   static const String resourceImagesSuccessBagIcon = "assets/images/success_bag_icon.png";
