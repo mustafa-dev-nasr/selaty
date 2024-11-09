@@ -6,11 +6,11 @@ class Routes {
   static const String homeScreen = "/HomeScreen";
   static const String splashScreen = "/SplashScreen";
   static const String followReport = "/FollowReport";
-  static const String confirmView = "/ConfirmScreen";
-  static const String confirmReport = "/ConfirmScreen";
-  static const String editProfile = "/EditProfile";
-  static const String editSetting = "/EditSetting";
-  static const String cardScreen = "/CardScreen";
+  static const String successfulRequest = "/SuccessfulRequest";
+  static const String arrangeTracks = "/ArrangeTracks";//
+  static const String deliveryAddressScreen = "/DeliveryAddressScreen";//
+  static const String emptyCartScreen = "/EmptyCartScreen";//
+  static const String cardScreen = "/CardScreen";//
   static const String resetPassword = "/ResetPassword";
   static const String secondResetPasswordScreen = "/SecondResetPasswordScreen";
   static const String changePhoneNumber = "/ChangePhoneNumber";

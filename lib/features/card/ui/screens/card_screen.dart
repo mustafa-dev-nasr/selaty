@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:selaty/core/helpers/extensions/app_navigotion.dart';
+import 'package:selaty/core/routing/route.dart';
 import 'package:selaty/core/widgets/app_text_button.dart';
 import 'package:selaty/core/theming/app_colors.dart';
 import 'package:selaty/core/theming/app_text_styles.dart';
@@ -51,18 +52,20 @@ class CardScreenState extends State<CardScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomIconBar(icon: Icons.camera_alt_outlined),
-                Text("عربه التسوق", style: AppTextStyles.font20BlackBold),
-                CustomIconBar(
-                  icon: Icons.arrow_forward_ios_outlined,
-                  onPressed: () => context.pop(),
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomIconBar(icon: Icons.camera_alt_outlined),
+                  Text("عربه التسوق", style: AppTextStyles.font20BlackBold),
+                  CustomIconBar(
+                    icon: Icons.arrow_forward_ios_outlined,
+                    onPressed: () => context.pop(),
+                  ),
+                ],
+              ),
             ),
-            20.verticalSpace,
             Expanded(
               child: ListView.builder(
                 itemCount: cartItems.length,
@@ -88,7 +91,9 @@ class CardScreenState extends State<CardScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: AppTextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pushNamed(Routes.emptyCartScreen);
+                      },
                       backgroundColor: AppColors.softGreen,
                       buttonText: "الدفع",
                       textStyle: AppTextStyles.font22WhiteMedium,
