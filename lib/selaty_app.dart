@@ -6,6 +6,7 @@ import 'package:selaty/generated/l10n.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/route.dart';
 import 'core/theming/app_colors.dart';
+import 'features/forgot_password.dart/ui/screens/forgot_password_screen.dart';
 import 'features/home/ui/screens/home_screen.dart';
 
 class SelatyApp extends StatelessWidget {
@@ -41,7 +42,7 @@ class SelatyApp extends StatelessWidget {
           supportedLocales: S.delegate.supportedLocales,
           locale: const Locale('ar'),
           title: 'Radary',
-          home: const SplashScreen()
+          home: const ForgotPasswordScreen()
           // initialRoute:
           //     isLoggedIn ? Routes.homeScreen : Routes.onBoardingScreen,
         );

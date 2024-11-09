@@ -101,7 +101,6 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
         : const SizedBox();
   }
 
-  // Bottom controls (smooth page indicator and next button)
   Widget _buildBottomControls(BuildContext context, int totalItems) {
     // Function to get active dot color based on the current page index
     Color getActiveDotColor(int currentPage) {
@@ -116,6 +115,16 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
           return AppColors.lightRed;
       }
     }
+
+    // Wait for the page to be built before accessing `pageController.page`
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_pageController.page != null) {
+        setState(() {
+          _isLastPage = _pageController.page!.toInt() == totalItems - 1;
+          _isFirstPage = _pageController.page!.toInt() == 0;
+        });
+      }
+    });
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
