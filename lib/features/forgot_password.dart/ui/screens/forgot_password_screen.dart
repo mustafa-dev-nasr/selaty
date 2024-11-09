@@ -96,7 +96,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         width: double.infinity,
                         child: AppTextButton(
                           onPressed: () {
-                            // Add functionality here
+                            context.pushNamed(Routes.confirmPasswordChange);
                           },
                           buttonText: "تغير",
                           textStyle: AppTextStyles.font20WhiteBold,

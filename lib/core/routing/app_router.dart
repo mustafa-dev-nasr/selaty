@@ -6,6 +6,7 @@ import '../../features/card/ui/screens/empty_cart_screen.dart';
 import '../../features/categories_details.dart/ui/screens/categories_details_screen.dart';
 import '../../features/delivery_address/ui/screens/arrange_tracks.dart';
 import '../../features/delivery_address/ui/screens/delivery_address_screen.dart';
+import '../../features/forgot_password.dart/ui/screens/confirm_password_change.dart';
 import '../../features/forgot_password.dart/ui/screens/forgot_password_screen.dart';
 import '../../features/home/ui/screens/home_screen.dart';
 import '../../features/sign_up/ui/screens/sign_up.dart';
@@ -29,6 +30,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.forgotPassword:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
+        case Routes.confirmPasswordChange:  return MaterialPageRoute(builder: (_) => const ConfirmPasswordChange());
       case Routes.signUpScreen:
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case Routes.homeScreen:

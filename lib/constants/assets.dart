@@ -18,6 +18,10 @@ class Assets {
   /// assets/images/category_icon.png
   static const String resourceImagesCategoryIcon = "assets/images/category_icon.png";
 
+  /// Assets for resourceImagesConfirmPasswordChange
+  /// assets/images/ConfirmPasswordChange.png
+  static const String resourceImagesConfirmPasswordChange = "assets/images/ConfirmPasswordChange.png";
+
   /// Assets for resourceImagesDelivery
   /// assets/images/delivery.png
   static const String resourceImagesDelivery = "assets/images/delivery.png";
