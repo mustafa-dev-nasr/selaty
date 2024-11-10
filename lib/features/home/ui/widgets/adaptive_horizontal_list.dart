@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:selaty/core/theming/app_colors.dart';
 import '../../../../constants/assets.dart';
 import '../../../qualifiers/ui/widgets/info_card.dart';
 

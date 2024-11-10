@@ -27,25 +27,25 @@ class SelatyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primaryColor: blue,
-            scaffoldBackgroundColor: white,
-          ),
-          onGenerateRoute: appRouter.generateRoute,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          locale: const Locale('ar'),
-          title: 'Radary',
-          home: const ForgotPasswordScreen()
-          // initialRoute:
-          //     isLoggedIn ? Routes.homeScreen : Routes.onBoardingScreen,
-        );
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: blue,
+              scaffoldBackgroundColor: white,
+            ),
+            onGenerateRoute: appRouter.generateRoute,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            locale: const Locale('ar'),
+            title: 'Radary',
+            home: const SplashScreen(),
+            // initialRoute:
+            //     isLoggedIn ? Routes.homeScreen : Routes.onBoardingScreen,
+            );
       },
     );
   }

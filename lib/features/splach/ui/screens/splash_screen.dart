@@ -23,6 +23,9 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Stack(
       children: [
         Positioned.fill(
@@ -35,17 +38,19 @@ class SplashScreenState extends State<SplashScreen> {
         ),
         Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.r),
+            padding: EdgeInsets.symmetric(horizontal: isPortrait ? 20.r : 40.r),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   Assets.resourceImagesSplash,
-                  width: 500.r,
-                  height: 400.r,
+                  width:
+                      isPortrait ? 500.r : 300.r, // Adjust based on orientation
+                  height:
+                      isPortrait ? 400.r : 250.r, // Adjust based on orientation
                   fit: BoxFit.contain,
                 ),
-                SizedBox(height: 40.r),
+                SizedBox(height: isPortrait ? 40.r : 20.r), // Adjust spacing
                 const CircularProgressIndicator(
                   color: AppColors
                       .softGreen, // Set to your primary color or desired color
