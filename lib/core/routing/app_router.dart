@@ -23,14 +23,16 @@ class AppRouter {
       case Routes.splashScreen:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onBoardingScreen:
-        return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
+        return MaterialPageRoute(
+            builder: (_) => const OnBoardingScreens());
       case Routes.mainAuth:
         return MaterialPageRoute(builder: (_) => const MainAuth());
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.forgotPassword:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
-        case Routes.confirmPasswordChange:  return MaterialPageRoute(builder: (_) => const ConfirmPasswordChange());
+      case Routes.confirmPasswordChange:
+        return MaterialPageRoute(builder: (_) => const ConfirmPasswordChange());
       case Routes.signUpScreen:
         return MaterialPageRoute(builder: (_) => const SignUpScreen());
       case Routes.homeScreen:

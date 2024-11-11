@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../data/models/onboarding_info.dart';
 import '../../../../core/theming/app_text_styles.dart';
 
-class OnboardingContent extends StatelessWidget {
-  const OnboardingContent({
+class OnboardingContentBuildPrtrait extends StatelessWidget {
+  const OnboardingContentBuildPrtrait({
     super.key,
     required this.item,
     required this.pageController,
@@ -16,7 +16,6 @@ class OnboardingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -61,7 +60,7 @@ class OnboardingContent extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 0.1.sh), 
+          SizedBox(height: 0.1.sh),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -93,5 +92,3 @@ class OnboardingContent extends StatelessWidget {
     );
   }
 }
-
-

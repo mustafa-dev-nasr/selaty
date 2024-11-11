@@ -12,6 +12,9 @@ class MainAuth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -33,30 +36,44 @@ class MainAuth extends StatelessWidget {
                   // Logo image with responsive size
                   Image.asset(
                     Assets.resourceImagesSelaty,
-                    width: 200.r,
+                    width: isPortrait ? 200.r : 300.r,
                     height: 200.r,
                   ),
                   SizedBox(height: 40.r),
                   // Login button
-                  AppTextButton(
-                    onPressed: () {
-                      context.pushNamed(Routes.loginScreen);
-                    },
-                    buttonText: "تسجيل الدخول",
-                    textStyle: AppTextStyles.font16Whiteregular,
-                    backgroundColor: AppColors.lightRed,
-                    buttonWidth: MediaQuery.of(context).size.width * 0.95,
+                  SizedBox(
+                    width: isPortrait
+                        ? MediaQuery.of(context).size.width * 0.95
+                        : MediaQuery.of(context).size.width * 0.5,
+                    child: AppTextButton(
+                      onPressed: () {
+                        context.pushNamed(Routes.loginScreen);
+                      },
+                      buttonText: "تسجيل الدخول",
+                      buttonHeight: isPortrait ? 80.r : 120.r,
+                      textStyle: isPortrait
+                          ? const TextStyle(color: Colors.white, fontSize: 10)
+                          : AppTextStyles.font16Whiteregular,
+                      backgroundColor: AppColors.lightRed,
+                    ),
                   ),
                   SizedBox(height: 20.r),
                   // Sign-up button
-                  AppTextButton(
-                    onPressed: () {
-                      context.pushNamed(Routes.signUpScreen);
-                    },
-                    buttonText: "إنشاء حساب جديد",
-                    textStyle: AppTextStyles.font16Whiteregular,
-                    backgroundColor: AppColors.softGreen,
-                    buttonWidth: MediaQuery.of(context).size.width * 0.95,
+                  SizedBox(
+                    width: isPortrait
+                        ? MediaQuery.of(context).size.width * 0.95
+                        : MediaQuery.of(context).size.width * 0.5,
+                    child: AppTextButton(
+                      onPressed: () {
+                        context.pushNamed(Routes.signUpScreen);
+                      },
+                      buttonText: "إنشاء حساب جديد",
+                      buttonHeight: isPortrait ? 80.r : 120.r,
+                      textStyle: isPortrait
+                          ? const TextStyle(color: Colors.white)
+                          : AppTextStyles.font16Whiteregular,
+                      backgroundColor: AppColors.softGreen,
+                    ),
                   ),
                 ],
               ),
