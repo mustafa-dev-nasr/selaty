@@ -14,21 +14,20 @@ class AdaptiveHorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
 
     return SizedBox(
-      height: isPortrait ? screenHeight / 6.5 : screenHeight / 4,
+      height: isPortrait ? screenHeight / 7 : screenHeight / 2.5,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: itemCount,
         itemBuilder: (context, index) {
-          return InfoCard(
+          return const InfoCard(
             title: 'التصفيات',
             bcImagePath: Assets.resourceImagesFruitsCategory,
             imagePath: Assets.resourceImagesCategoryIcon,
-            width: isPortrait ? 100.w : MediaQuery.of(context).size.width / 2.5,
-            height: isPortrait ? screenHeight / 9 : screenHeight / 4,
           );
         },
       ),

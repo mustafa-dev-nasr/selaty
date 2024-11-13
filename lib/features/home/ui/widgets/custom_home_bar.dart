@@ -12,16 +12,26 @@ class CustomHomeBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 10.w, right: 10.w),
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: orientation == Orientation.portrait
+              ? _buildPortraitLayout(context)
+              : _buildLandscapeLayout(context),
+        );
+      },
+    );
+  }
+
+  Widget _buildPortraitLayout(BuildContext context) {
+    return SingleChildScrollView(
       child: Column(
         children: [
           Row(
             children: [
               GestureDetector(
-                onTap: () {
-                  context.pushNamed(Routes.profileScreen);
-                },
+                onTap: () => context.pushNamed(Routes.profileScreen),
                 child: CircleAvatar(
                   radius: 35.w,
                   backgroundColor: Colors.red,
@@ -61,7 +71,9 @@ class CustomHomeBar extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Add your onPressed functionality here
+                },
                 icon:
                     const Icon(Icons.camera_alt_outlined, color: Colors.black),
               ),
@@ -77,8 +89,10 @@ class CustomHomeBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: AppColors.vibrantRed,
                 ),
-                child: const Icon(Icons.format_list_bulleted_rounded,
-                    color: Colors.white),
+                child: const Icon(
+                  Icons.format_list_bulleted_rounded,
+                  color: Colors.white,
+                ),
               ),
               SizedBox(width: 20.w),
               Expanded(
@@ -92,10 +106,87 @@ class CustomHomeBar extends StatelessWidget {
                       const Icon(Icons.cancel_outlined, color: Colors.black),
                   validator: (value) {
                     // Add validation logic if needed
+                    return null;
                   },
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLandscapeLayout(BuildContext context) {
+    return SingleChildScrollView(
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () => context.pushNamed(Routes.profileScreen),
+            child: CircleAvatar(
+              radius: 35.w,
+              backgroundColor: Colors.red,
+              backgroundImage: const AssetImage(Assets.resourceImagesPerson),
+            ),
+          ),
+          SizedBox(width: 20.w),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "مصطفي مجدي",
+                  style: AppTextStyles.font22BlackMedium,
+                ),
+                SizedBox(height: 5.h),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 15.w,
+                      backgroundImage:
+                          const AssetImage(Assets.resourceImagesPlaceholder),
+                    ),
+                    SizedBox(width: 5.w),
+                    Expanded(
+                      child: Text(
+                        "المنصوره - شبين الكوم",
+                        style: TextStyle(fontSize: 18.sp, color: Colors.grey),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              // Add your onPressed functionality here
+            },
+            icon: const Icon(Icons.camera_alt_outlined, color: Colors.black),
+          ),
+          SizedBox(width: 20.w),
+          Container(
+            width: 55.w,
+            height: 55.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: AppColors.vibrantRed,
+            ),
+            child: const Icon(
+              Icons.format_list_bulleted_rounded,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(width: 20.w),
+          Expanded(
+            child: AppTextFormField(
+              hintText: "البحث عن المنتجات",
+              suffixIcon: const Icon(Icons.search_rounded, color: Colors.grey),
+              prefixIcon:
+                  const Icon(Icons.cancel_outlined, color: Colors.black),
+              validator: (value) => null,
+            ),
           ),
         ],
       ),

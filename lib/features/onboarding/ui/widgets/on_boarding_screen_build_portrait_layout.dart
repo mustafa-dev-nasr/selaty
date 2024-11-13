@@ -6,11 +6,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../core/routing/route.dart';
 import '../../../../core/theming/app_colors.dart';
-import '../../../../core/theming/app_text_styles.dart';
-import '../../../../generated/l10n.dart';
 import '../../data/models/onboarding_info.dart';
 import '../../data/repo/onboarding_items.dart';
-import '../../logic/onboarding_helpers.dart';
 import '../widgets/onboarding_content.dart';
 
 //OnBoardingScreenBuildPortraitLayout

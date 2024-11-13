@@ -56,10 +56,10 @@ class QualifiersScreen extends StatelessWidget {
                       bcImagePath: Assets.resourceImagesFruitsCategory,
                       title: 'التصفيات',
                       imagePath: Assets.resourceImagesCategoryIcon,
-                      width: isPortrait
-                          ? 200.w
-                          : MediaQuery.of(context).size.width / 2.5,
-                      height: isPortrait ? screenHeight / 8 : screenHeight / 4,
+                      // width: isPortrait
+                      //     ? 200.w
+                      //     : MediaQuery.of(context).size.width / 2.5,
+                      // height: isPortrait ? screenHeight / 8 : screenHeight / 4,
                     );
                   },
                 ),

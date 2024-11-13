@@ -14,22 +14,33 @@ class HeaderRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Padding(
       padding: EdgeInsets.only(left: 10.w, right: 10.w),
       child: Row(
         children: [
-          Text(title, style: AppTextStyles.font22BlackMedium),
+          Text(title,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: isPortrait ? 22.sp : 18.sp)),
           SizedBox(width: 10.w),
-          Text(subtitle ?? "", style: AppTextStyles.font20GrayMedium),
+          Text(subtitle ?? "",
+              style: isPortrait
+                  ? TextStyle(color: gray, fontSize: 16.sp)
+                  : AppTextStyles.font20GrayMedium),
           const Spacer(),
           IconButton(
             onPressed: onTap, // Implement the back navigation logic if needed
             icon: Icon(Icons.arrow_back_ios_new_sharp, color: gray, size: 20.w),
           ),
           GestureDetector(
-              onTap: onTap,
-              child: Text("مشاهده الكل",
-                  style: TextStyle(color: gray, fontSize: 16.sp))),
+            onTap: onTap,
+            child: Text(
+              "مشاهده الكل",
+              style: TextStyle(color: gray, fontSize: 16.sp),
+            ),
+          ),
         ],
       ),
     );

@@ -8,11 +8,15 @@ class CustomCarouselSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Detect the current orientation of the screen
+    final bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     return CarouselSlider(
       options: CarouselOptions(
-        height: MediaQuery.of(context).size.height * 0.2,
+        height: MediaQuery.of(context).size.height * (isPortrait ? 0.2 : 0.4),
         enlargeCenterPage: true,
-        viewportFraction: 1,
+        viewportFraction: isPortrait ? 1 : 0.5,
         autoPlay: true,
         autoPlayInterval: const Duration(seconds: 3),
         autoPlayAnimationDuration: const Duration(milliseconds: 800),
