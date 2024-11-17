@@ -6,8 +6,8 @@ import 'package:selaty/core/routing/route.dart';
 import 'package:selaty/core/theming/app_colors.dart';
 import 'package:selaty/core/theming/app_text_styles.dart';
 
-class ProductGridItem extends StatelessWidget {
-  const ProductGridItem({super.key});
+class BuildPortraitLayoutProductGridItem extends StatelessWidget {
+  const BuildPortraitLayoutProductGridItem({super.key});
 
   @override
   Widget build(BuildContext context) {

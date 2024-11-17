@@ -14,6 +14,8 @@ class CustomHomeBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
+        print("Current Orientation: $orientation");
+
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           child: orientation == Orientation.portrait
@@ -45,7 +47,7 @@ class CustomHomeBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "مصطفي مجدي",
+                      "الوضع الرأسي - مجدي",
                       style: AppTextStyles.font22BlackMedium,
                     ),
                     SizedBox(height: 5.h),
@@ -102,8 +104,10 @@ class CustomHomeBar extends StatelessWidget {
                     Icons.search_rounded,
                     color: Colors.grey,
                   ),
-                  prefixIcon:
-                      const Icon(Icons.cancel_outlined, color: Colors.black),
+                  prefixIcon: const Icon(
+                    Icons.cancel_outlined,
+                    color: Colors.black,
+                  ),
                   validator: (value) {
                     // Add validation logic if needed
                     return null;
@@ -135,7 +139,7 @@ class CustomHomeBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "مصطفي مجدي",
+                  "الوضع الأفقي - مصطفي مجدي",
                   style: AppTextStyles.font22BlackMedium,
                 ),
                 SizedBox(height: 5.h),

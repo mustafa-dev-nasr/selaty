@@ -7,10 +7,16 @@ class ImageBannerSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Detect orientation
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Container(
-      margin: EdgeInsets.only(right: 10.r, left: 10.r),
+      margin: EdgeInsets.symmetric(horizontal: 10.r),
       width: double.infinity,
-      height: MediaQuery.of(context).size.height / 4,
+      height: isLandscape
+          ? MediaQuery.of(context).size.height / 1.7 // For landscape
+          : MediaQuery.of(context).size.height / 5, // For portrait
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.r),
         image: const DecorationImage(

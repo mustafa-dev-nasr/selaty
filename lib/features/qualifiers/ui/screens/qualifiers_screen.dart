@@ -44,22 +44,18 @@ class QualifiersScreen extends StatelessWidget {
               Expanded(
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Two items in each row
+                    crossAxisCount: isPortrait ? 2 : 4, // Two items in each row
                     crossAxisSpacing: 10.w, // Space between items horizontally
                     mainAxisSpacing: 10.h, // Space between items vertically
-                    childAspectRatio: (screenWidth / 2) /
-                        (screenHeight / 4), // Adjust as necessary
+                    childAspectRatio: (screenHeight / 1.4) /
+                        (screenHeight / 1.5), // Adjust as necessary
                   ),
                   itemCount: 10, // Replace with dynamic item count if needed
                   itemBuilder: (context, index) {
-                    return InfoCard(
+                    return const InfoCard(
                       bcImagePath: Assets.resourceImagesFruitsCategory,
                       title: 'التصفيات',
                       imagePath: Assets.resourceImagesCategoryIcon,
-                      // width: isPortrait
-                      //     ? 200.w
-                      //     : MediaQuery.of(context).size.width / 2.5,
-                      // height: isPortrait ? screenHeight / 8 : screenHeight / 4,
                     );
                   },
                 ),

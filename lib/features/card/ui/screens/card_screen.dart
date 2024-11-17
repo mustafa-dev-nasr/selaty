@@ -50,61 +50,115 @@ class CardScreenState extends State<CardScreen> {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackgrond,
       body: SafeArea(
-        child: Column(
+        child: OrientationBuilder(
+          builder: (context, orientation) {
+            if (orientation == Orientation.portrait) {
+              return buildPortraitLayout();
+            } else {
+              return buildLandscapeLayout();
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  // Portrait Layout
+  Widget buildPortraitLayout() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CustomIconBar(icon: Icons.camera_alt_outlined),
+              Text(
+                "عربه التسوق",
+                style: AppTextStyles.font20BlackBold.copyWith(
+                  fontSize: 20.sp, // Responsive size
+                ),
+              ),
+              CustomIconBar(
+                icon: Icons.arrow_forward_ios_outlined,
+                onPressed: () => context.pop(),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: cartItems.length,
+            itemBuilder: (context, index) => CartItemWidget(
+              item: cartItems[index],
+              onIncrement: () => _incrementItem(index),
+              onDecrement: () => _decrementItem(index),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 3.5,
+          child: CheckoutSummaryWidget(
+            itemCount: totalItemsCount,
+            subtotal: totalCartPrice,
+            total: totalCartPrice,
+          ),
+        ),
+        Row(
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomIconBar(icon: Icons.camera_alt_outlined),
-                  Text("عربه التسوق", style: AppTextStyles.font20BlackBold),
-                  CustomIconBar(
-                    icon: Icons.arrow_forward_ios_outlined,
-                    onPressed: () => context.pop(),
-                  ),
-                ],
-              ),
-            ),
             Expanded(
-              child: ListView.builder(
-                itemCount: cartItems.length,
-                itemBuilder: (context, index) => CartItemWidget(
-                  item: cartItems[index],
-                  onIncrement: () => _incrementItem(index),
-                  onDecrement: () => _decrementItem(index),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height /
-                  3.5, // Adjust height as needed
-              child: CheckoutSummaryWidget(
-                itemCount: totalItemsCount,
-                subtotal: totalCartPrice,
-                total: totalCartPrice,
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: AppTextButton(
-                      onPressed: () {
-                        context.pushNamed(Routes.emptyCartScreen);
-                      },
-                      backgroundColor: AppColors.softGreen,
-                      buttonText: "الدفع",
-                      textStyle: AppTextStyles.font22WhiteMedium,
-                    ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AppTextButton(
+                  onPressed: () {
+                    context.pushNamed(Routes.emptyCartScreen);
+                  },
+                  backgroundColor: AppColors.softGreen,
+                  buttonText: "الدفع",
+                  textStyle: AppTextStyles.font22WhiteMedium.copyWith(
+                    fontSize: 22.sp, // Responsive size
                   ),
                 ),
-              ],
+              ),
             ),
           ],
         ),
-      ),
+      ],
+    );
+  }
+
+  // Landscape Layout
+  Widget buildLandscapeLayout() {
+    return Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: ListView.builder(
+            itemCount: cartItems.length,
+            itemBuilder: (context, index) => CartItemWidget(
+              item: cartItems[index],
+              onIncrement: () => _incrementItem(index),
+              onDecrement: () => _decrementItem(index),
+            ),
+          ),
+        ),
+        // Right Column (Checkout Summary & Payment Button)
+        Expanded(
+          flex: 1,
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height - 50,
+                child: CheckoutSummaryWidget(
+                  itemCount: totalItemsCount,
+                  subtotal: totalCartPrice,
+                  total: totalCartPrice,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

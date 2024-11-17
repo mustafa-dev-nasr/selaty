@@ -19,72 +19,74 @@ class EmptyCartScreen extends StatelessWidget {
         body: SafeArea(
             child: Padding(
           padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomIconBar(icon: Icons.camera_alt_outlined),
-                  Text("عربه التسوق", style: AppTextStyles.font20BlackBold),
-                  CustomIconBar(
-                    icon: Icons.arrow_forward_ios_outlined,
-                    onPressed: () => context.pop(),
-                  ),
-                ],
-              ),
-              const Spacer(
-                flex: 1,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 1.5,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Column(
+          child: singl(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Spacer(),
-                    Image.asset(
-                      Assets.resourceImagesBagIcon,
-                      color: Colors.red,
-                      width: 100.w,
-                      height: 100.h,
-                    ),
-                    Text(
-                      "السلة الحالية فارغة",
-                      style: AppTextStyles.font24BlackSemibold,
-                    ),
-                    Text(
-                      "أجعل سلتك سعيده وأضف منتجات",
-                      style: AppTextStyles.font16BlackRegular,
-                    ),
-                    const Spacer(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: 40.0.w, right: 40.0.w, bottom: 20.0.h),
-                            child: AppTextButton(
-                                backgroundColor: AppColors.softGreen,
-                                onPressed: () {
-                                  context
-                                      .pushNamed(Routes.deliveryAddressScreen);
-                                },
-                                buttonText: "أبدأ التسوق",
-                                textStyle: AppTextStyles.font22WhiteMedium),
-                          ),
-                        ),
-                      ],
+                    CustomIconBar(icon: Icons.camera_alt_outlined),
+                    Text("عربه التسوق", style: AppTextStyles.font20BlackBold),
+                    CustomIconBar(
+                      icon: Icons.arrow_forward_ios_outlined,
+                      onPressed: () => context.pop(),
                     ),
                   ],
                 ),
-              ),
-              const Spacer(
-                flex: 2,
-              )
-            ],
+                const Spacer(
+                  flex: 1,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 1.5,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  child: Column(
+                    children: [
+                      const Spacer(),
+                      Image.asset(
+                        Assets.resourceImagesBagIcon,
+                        color: Colors.red,
+                        width: 100.w,
+                        height: 100.h,
+                      ),
+                      Text(
+                        "السلة الحالية فارغة",
+                        style: AppTextStyles.font24BlackSemibold,
+                      ),
+                      Text(
+                        "أجعل سلتك سعيده وأضف منتجات",
+                        style: AppTextStyles.font16BlackRegular,
+                      ),
+                      const Spacer(),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: 40.0.w, right: 40.0.w, bottom: 20.0.h),
+                              child: AppTextButton(
+                                  backgroundColor: AppColors.softGreen,
+                                  onPressed: () {
+                                    context
+                                        .pushNamed(Routes.deliveryAddressScreen);
+                                  },
+                                  buttonText: "أبدأ التسوق",
+                                  textStyle: AppTextStyles.font22WhiteMedium),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const Spacer(
+                  flex: 2,
+                )
+              ],
+            ),
           ),
         )));
   }

@@ -17,15 +17,21 @@ class CategoryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isPortraitOrientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Column(
       children: [
         Stack(
           clipBehavior: Clip.none,
           children: [
+            // Background container
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height / 5,
+              height: isPortraitOrientation
+                  ? screenHeight / 5 // 1/5th height for portrait
+                  : screenHeight / 3, // 1/3rd height for landscape
               decoration: const BoxDecoration(
                 color: AppColors.aquaGreen,
               ),
@@ -96,6 +102,7 @@ class CategoryHeader extends StatelessWidget {
           padding: EdgeInsets.only(left: 20.w, right: 20.w),
           child: Row(
             children: [
+              // Action button
               Container(
                 width: 55.w,
                 height: 55.h,
@@ -107,8 +114,10 @@ class CategoryHeader extends StatelessWidget {
                     color: Colors.white),
               ),
               const Spacer(),
+              // Search field
               SizedBox(
-                width: MediaQuery.of(context).size.width / 1.3 - 20.w,
+                width: screenWidth / (isPortraitOrientation ? 1.3 : 1.5) -
+                    20.w, // Adjust width for landscape and portrait
                 child: AppTextFormField(
                   hintText: "البحث عن المنتجات",
                   suffixIcon: const Icon(

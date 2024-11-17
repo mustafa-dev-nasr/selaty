@@ -23,6 +23,8 @@ class OrderStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -33,7 +35,7 @@ class OrderStep extends StatelessWidget {
             Column(
               children: [
                 CircleAvatar(
-                  radius: 16.r,
+                  radius: isPortrait ? 16.r : 20.r,
                   backgroundColor:
                       isActive ? AppColors.softGreen : Colors.grey[400],
                   child: Icon(

@@ -46,7 +46,7 @@ class SelatyApp extends StatelessWidget {
           supportedLocales: S.delegate.supportedLocales,
           locale: const Locale('ar'),
           title: 'Radary',
-          home: const HomeScreen(),
+          home: const SplashScreen(),
           // initialRoute:
           //     isLoggedIn ? Routes.homeScreen : Routes.onBoardingScreen,
         );

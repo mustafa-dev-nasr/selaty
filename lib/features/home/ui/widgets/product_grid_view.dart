@@ -3,26 +3,34 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:selaty/constants/assets.dart';
 import 'package:selaty/core/theming/app_colors.dart';
 import 'package:selaty/core/theming/app_text_styles.dart';
-import 'product_grid_item.dart'; // Import the new widget
+import 'build_portrait_layout_product_grid_item.dart'; // Import the new widget
+import 'build_landscape_layout_product_grid_item.dart'; // Import landscape layout widget
 
 class ProductGridView extends StatelessWidget {
   const ProductGridView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isPortraitOrientation = MediaQuery.of(context).orientation == Orientation.portrait;
+    final isPortraitOrientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.6,
+      height: isPortraitOrientation
+          ? MediaQuery.of(context).size.height / 1.6
+          : MediaQuery.of(context).size.height * 2,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: isPortraitOrientation ? 2 : 4,
+          crossAxisCount: 2, // Adjust for portrait vs landscape
           mainAxisSpacing: 10.w,
-          childAspectRatio: 1.3, // Adjust as needed
+          childAspectRatio:
+              isPortraitOrientation ? 1.3 : 1.5, // Adjust aspect ratio
         ),
-        itemCount: 10, // Adjust the number of items as needed
+        itemCount: 10, // Adjust number of items as needed
         itemBuilder: (context, index) {
-          return const ProductGridItem(); // Reusing the external widget
+          return isPortraitOrientation
+              ? const BuildPortraitLayoutProductGridItem() // Portrait layout item
+              : const BuildLandscapeLayoutProductGridItem(); // Landscape layout item
         },
       ),
     );
