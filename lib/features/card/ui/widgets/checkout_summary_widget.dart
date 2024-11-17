@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:selaty/core/helpers/extensions/app_navigotion.dart';
 import 'package:selaty/core/theming/app_text_styles.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:selaty/core/theming/app_text_styles.dart';
 
 import '../../../../core/routing/route.dart';
 import '../../../../core/theming/app_colors.dart';
@@ -27,19 +24,21 @@ class CheckoutSummaryWidget extends StatelessWidget {
     final screenOrientation = MediaQuery.of(context).orientation;
 
     return screenOrientation == Orientation.portrait
-        ? BuildPortraitLayout(
+        ? buildPortraitLayout(
             itemCount: itemCount,
             subtotal: subtotal,
             total: total,
-            context: context)
-        : BuildLandscapeLayout(
+            context: context,
+          )
+        : buildLandscapeLayout(
             itemCount: itemCount,
             subtotal: subtotal,
             total: total,
-            context: context);
+            context: context,
+          );
   }
 
-  Widget BuildPortraitLayout({
+  Widget buildPortraitLayout({
     required int itemCount,
     required double subtotal,
     required double total,
@@ -57,20 +56,22 @@ class CheckoutSummaryWidget extends StatelessWidget {
         children: [
           SummaryRow(label: "البنود", value: "$itemCount"),
           SummaryRow(
-              label: "المجموع الفرعي",
-              value: "${subtotal.toStringAsFixed(2)}\$"),
+            label: "المجموع الفرعي",
+            value: "${subtotal.toStringAsFixed(2)}\$",
+          ),
           const SummaryRow(label: "رسوم التوصيل", value: "Free"),
           const Spacer(),
           SummaryRow(
-              label: " الاجمالي",
-              value: "${total.toStringAsFixed(2)}\$",
-              isTotal: true),
+            label: "الاجمالي",
+            value: "${total.toStringAsFixed(2)}\$",
+            isTotal: true,
+          ),
         ],
       ),
     );
   }
 
-  Widget BuildLandscapeLayout({
+  Widget buildLandscapeLayout({
     required int itemCount,
     required double subtotal,
     required double total,
@@ -78,21 +79,27 @@ class CheckoutSummaryWidget extends StatelessWidget {
   }) {
     return Container(
       margin: EdgeInsets.all(10.r),
-      padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.r),
       ),
-      child: Expanded(
+      child: SingleChildScrollView(
+        // Add this widget for scrolling in landscape
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SummaryRow(label: "البنود", value: "$itemCount"),
-            // 20.verticalSpace,
             SummaryRow(
-                label: "المجموع الفرعي",
-                value: "${subtotal.toStringAsFixed(2)}\$"),
-            // 80.verticalSpace,
+              label: "المجموع الفرعي",
+              value: "${subtotal.toStringAsFixed(2)}\$",
+            ),
+            const SummaryRow(label: "رسوم التوصيل", value: "Free"),
+            SummaryRow(
+              label: "الاجمالي",
+              value: "${total.toStringAsFixed(2)}\$",
+              isTotal: true,
+            ),
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -103,7 +110,7 @@ class CheckoutSummaryWidget extends StatelessWidget {
                   backgroundColor: AppColors.softGreen,
                   buttonText: "الدفع",
                   textStyle: AppTextStyles.font22WhiteMedium.copyWith(
-                    fontSize: 10.sp, // Responsive size
+                    fontSize: 14.sp, // Responsive size
                   ),
                 ),
               ),
@@ -132,7 +139,7 @@ class SummaryRow extends StatelessWidget {
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
     return Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           label,
@@ -141,24 +148,24 @@ class SummaryRow extends StatelessWidget {
               : TextStyle(
                   fontSize: isPortrait
                       ? 24.sp
-                      : 10.sp, // Responsively adjust font size
+                      : 12.sp, // Responsively adjust font size
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey),
+                  color: Colors.grey,
+                ),
         ),
         Text(
           value,
           style: isTotal
-              ? AppTextStyles.font24BlackSemibold
+              ? AppTextStyles.font12BlackRegular
               : TextStyle(
                   fontSize: isPortrait
                       ? 24.sp
                       : 12.sp, // Responsively adjust font size
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey),
+                  color: Colors.grey,
+                ),
         ),
       ],
     );
   }
 }
-
-// Expanded section for displaying the summary widget

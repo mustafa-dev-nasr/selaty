@@ -11,14 +11,14 @@ import '../../data/models/cart_item_model.dart';
 import '../widgets/cart_item_widget.dart';
 import '../widgets/checkout_summary_widget.dart';
 
-class CardScreen extends StatefulWidget {
-  const CardScreen({super.key});
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  CardScreenState createState() => CardScreenState();
+  CartScreenState createState() => CartScreenState();
 }
 
-class CardScreenState extends State<CardScreen> {
+class CartScreenState extends State<CartScreen> {
   final List<CartItem> cartItems = [
     CartItem(name: "كمثري امريكي", price: 35.0),
     CartItem(name: "تفاح احمر", price: 20.0),
@@ -129,30 +129,58 @@ class CardScreenState extends State<CardScreen> {
 
   // Landscape Layout
   Widget buildLandscapeLayout() {
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          flex: 2,
-          child: ListView.builder(
-            itemCount: cartItems.length,
-            itemBuilder: (context, index) => CartItemWidget(
-              item: cartItems[index],
-              onIncrement: () => _incrementItem(index),
-              onDecrement: () => _decrementItem(index),
+        SizedBox(
+          height: 100.h,
+          child: Padding(
+            padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomIconBar(icon: Icons.camera_alt_outlined),
+                Text(
+                  "عربه التسوق",
+                  style: AppTextStyles.font20BlackBold.copyWith(
+                    fontSize: 20.sp, // Responsive size
+                  ),
+                ),
+                CustomIconBar(
+                  icon: Icons.arrow_forward_ios_outlined,
+                  onPressed: () => context.pop(),
+                ),
+              ],
             ),
           ),
         ),
-        // Right Column (Checkout Summary & Payment Button)
         Expanded(
-          flex: 1,
-          child: Column(
+          flex: 2,
+          child: Row(
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height - 50,
-                child: CheckoutSummaryWidget(
-                  itemCount: totalItemsCount,
-                  subtotal: totalCartPrice,
-                  total: totalCartPrice,
+              Expanded(
+                flex: 2,
+                child: ListView.builder(
+                  itemCount: cartItems.length,
+                  itemBuilder: (context, index) => CartItemWidget(
+                    item: cartItems[index],
+                    onIncrement: () => _incrementItem(index),
+                    onDecrement: () => _decrementItem(index),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height - 100,
+                      child: CheckoutSummaryWidget(
+                        itemCount: totalItemsCount,
+                        subtotal: totalCartPrice,
+                        total: totalCartPrice,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

@@ -53,6 +53,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
           ),
           child: CustomScrollView(
             slivers: [
+              // Header with Icons and Title
               SliverToBoxAdapter(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,11 +67,15 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                   ],
                 ),
               ),
+
+              // Address List for Portrait and Landscape
               SliverPadding(
                 padding: EdgeInsets.symmetric(vertical: 20.h),
                 sliver:
                     isPortrait ? BuildPortraitLayout() : BuildLandscapeLayout(),
               ),
+
+              // Bottom Button
               SliverPadding(
                 padding: EdgeInsets.only(bottom: 20.h),
                 sliver: SliverToBoxAdapter(
@@ -83,7 +88,10 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
                             context.pushNamed(Routes.arrangeTracks);
                           },
                           buttonText: "أبدأ التسوق",
-                          textStyle: AppTextStyles.font22WhiteMedium,
+                          textStyle: isPortrait
+                              ? AppTextStyles.font22WhiteMedium
+                              : AppTextStyles.font12BlackRegular
+                                  .copyWith(color: Colors.white),
                         ),
                       ),
                     ],
@@ -97,6 +105,7 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     );
   }
 
+  // Portrait Layout: Uses a shorter card height
   SliverList BuildPortraitLayout() {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -202,107 +211,114 @@ class _DeliveryAddressScreenState extends State<DeliveryAddressScreen> {
     );
   }
 
-  SliverList BuildLandscapeLayout() {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          bool isSelected = selectedIndex == index;
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-            child: Stack(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 1.2,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    elevation: isSelected ? 4 : 1,
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0.h),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Spacer(flex: 2),
-                          Row(
+  SliverToBoxAdapter BuildLandscapeLayout() {
+    return SliverToBoxAdapter(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: List.generate(
+            addresses.length,
+            (index) {
+              bool isSelected = selectedIndex == index;
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.8,
+                      height: MediaQuery.of(context).size.height / 1.4,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: isSelected ? 4 : 1,
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0.h),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(
-                                isSelected
-                                    ? Icons.radio_button_checked
-                                    : Icons.radio_button_off,
-                                color: isSelected ? Colors.red : Colors.grey,
+                              const Spacer(flex: 2),
+                              Row(
+                                children: [
+                                  Icon(
+                                    isSelected
+                                        ? Icons.radio_button_checked
+                                        : Icons.radio_button_off,
+                                    color:
+                                        isSelected ? Colors.red : Colors.grey,
+                                  ),
+                                  10.horizontalSpace,
+                                  Text(
+                                    addresses[index]["title"]!,
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  const Icon(
+                                    Icons.sentiment_very_satisfied_sharp,
+                                    color: Colors.grey,
+                                  ),
+                                ],
                               ),
-                              10.horizontalSpace,
+                              SizedBox(height: 8.h),
                               Text(
-                                addresses[index]["title"]!,
+                                addresses[index]["address"]!,
                                 style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.sp,
+                                  color: Colors.black54,
                                 ),
                               ),
-                              const Spacer(),
-                              const Icon(
-                                Icons.sentiment_very_satisfied_sharp,
-                                color: Colors.grey,
+                              SizedBox(height: 8.h),
+                              Text(
+                                "جوال: ${addresses[index]["phone"]!}",
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
                               ),
+                              const Spacer(flex: 1),
                             ],
                           ),
-                          SizedBox(height: 8.h),
-                          Text(
-                            addresses[index]["address"]!,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Colors.black54,
-                            ),
-                          ),
-                          SizedBox(height: 8.h),
-                          Text(
-                            "جوال: ${addresses[index]["phone"]!}",
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const Spacer(flex: 1),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 5.h,
-                  right: 20.w,
-                  child: Container(
-                    padding:
-                        EdgeInsets.only(left: 14.w, right: 14.w, bottom: 8.h),
-                    decoration: BoxDecoration(
-                      color: AppColors.lightGreen,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(8.r),
-                        bottomRight: Radius.circular(8.r),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "أفتراضي",
-                        style: TextStyle(
-                          color: Colors.green[700],
-                          fontSize: 16.sp,
                         ),
                       ),
                     ),
-                  ),
+                    Positioned(
+                      top: 5.h,
+                      right: 20.w,
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            left: 14.w, right: 14.w, bottom: 8.h),
+                        decoration: BoxDecoration(
+                          color: AppColors.lightGreen,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8.r),
+                            bottomRight: Radius.circular(8.r),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "أفتراضي",
+                            style: TextStyle(
+                              color: Colors.green[700],
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
-        childCount: addresses.length,
+              );
+            },
+          ),
+        ),
       ),
     );
   }

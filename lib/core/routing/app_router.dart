@@ -45,7 +45,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => const CategoriesDetailsScreen());
       case Routes.cardScreen:
-        return MaterialPageRoute(builder: (_) => const CardScreen());
+        return MaterialPageRoute(builder: (_) => const CartScreen());
       case Routes.emptyCartScreen:
         return MaterialPageRoute(builder: (_) => const EmptyCartScreen());
       case Routes.deliveryAddressScreen:

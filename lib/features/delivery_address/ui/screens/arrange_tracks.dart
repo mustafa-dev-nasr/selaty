@@ -147,6 +147,17 @@ class _ArrangeTracksState extends State<ArrangeTracks> {
               ),
             ),
           ),
+          // Expanded(
+          //   flex: 2,
+          //   child: AppTextButton(
+          //     backgroundColor: const Color.fromARGB(255, 137, 210, 177),
+          //     buttonText: "أنهاء",
+          //     textStyle: AppTextStyles.font12BlackRegular,
+          //     onPressed: () {
+          //       context.pushNamed(Routes.homeScreen);
+          //     },
+          //   ),
+          // ),
         ],
       ),
     );
@@ -154,6 +165,8 @@ class _ArrangeTracksState extends State<ArrangeTracks> {
 
   // Landscape Layout
   Widget BuildLandscapeLayout(BuildContext context) {
+    final orientation =
+        MediaQuery.of(context).orientation == Orientation.portrait;
     return Row(
       children: [
         // Left-side content (Order Info)

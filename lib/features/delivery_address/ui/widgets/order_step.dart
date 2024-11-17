@@ -35,7 +35,7 @@ class OrderStep extends StatelessWidget {
             Column(
               children: [
                 CircleAvatar(
-                  radius: isPortrait ? 16.r : 20.r,
+                  radius: isPortrait ? 16.r : 30.r,
                   backgroundColor:
                       isActive ? AppColors.softGreen : Colors.grey[400],
                   child: Icon(
